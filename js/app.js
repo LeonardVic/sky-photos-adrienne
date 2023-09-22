@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementsByClassName('loader-cont')[0].style.display = 'none';
+    setTimeout(() => {
+        document.getElementsByClassName('loader-cont')[0].style.display = 'none';
+    }, 5000);
     const nextImage = document.getElementById('next-image');
     const previousImage = document.getElementById('previous-image');
     const imageContent = document.getElementById('image-content');
@@ -17,6 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         if (password.value === 'TqmChaparro123') {
+            document.getElementsByClassName('loader-cont')[0].style.display = 'flex';
+            setTimeout(() => {
+                document.getElementsByClassName('loader-cont')[0].style.display = 'none';
+            }, 3000);
             adri.style.display = 'none';
             galeria.style.display = 'grid';
         } else {
