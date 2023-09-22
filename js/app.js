@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    setTimeout(() => {
-        document.getElementsByClassName('loader-cont')[0].style.display = 'none';
-    }, 5000);
+    const loaderCont = document.getElementsByClassName('loader-cont')[0];
     const nextImage = document.getElementById('next-image');
     const previousImage = document.getElementById('previous-image');
     const imageContent = document.getElementById('image-content');
@@ -13,22 +11,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const contenido = document.getElementById('contenido');
     const nono = document.getElementById('404');
     const galeria = document.getElementById('galeria');
+    const download = document.getElementById('download');
 
     let position = 1;
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         if (password.value === 'TqmChaparro123') {
-            document.getElementsByClassName('loader-cont')[0].style.display = 'flex';
+            toggleLoader(true);
             setTimeout(() => {
-                document.getElementsByClassName('loader-cont')[0].style.display = 'none';
+                toggleLoader(false);
             }, 3000);
             adri.style.display = 'none';
             galeria.style.display = 'grid';
         } else {
             alert('That is not the password 🤨🤨🤨🤨🤨🤨🤨🤨');
         }
-    })
+    });
 
     nextImage.addEventListener('click', () => {
         position = position === 25 ? 1 : position + 1;
@@ -57,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateImage() {
         imageContent.src = `/img/${position}.jpg`;
+        download.href = `/img/${position}.jpg`;
     }
 
     // Función para mostrar u ocultar la página según el tamaño de la pantalla
@@ -81,4 +81,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Escuchar el evento 'resize' para detectar cambios en el tamaño de la pantalla
     window.addEventListener('resize', togglePageVisibility);
 
+    // Función para mostrar u ocultar el loader
+    function toggleLoader(show) {
+        loaderCont.style.display = show ? 'flex' : 'none';
+    }
+
+    // Ocultar el loader después de 5 segundos
+    setTimeout(() => {
+        toggleLoader(false);
+    }, 5000);
 });
